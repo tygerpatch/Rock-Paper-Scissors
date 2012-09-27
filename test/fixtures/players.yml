@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+#one:
+#  name: MyString
+#  password: MyString
+#  score:
+
+#two:
+#  name: MyString
+#  password: MyString
+#  score:
+
+player1:
+  name: player1
+  password: pass1
+
+player2:
+  name: player2
+  password: pass2
+
+player3:
+  name: player3
+  password: pass3

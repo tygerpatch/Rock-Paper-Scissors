@@ -1,0 +1,6 @@
+player = Player.find session[:id]
+game = player.game
+
+unless game.opponent.nil?
+  page.redirect_to :action => "play"  
+end

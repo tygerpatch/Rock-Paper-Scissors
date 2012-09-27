@@ -1,0 +1,42 @@
+<style type="text/css">
+  tr:nth-child(even) {background: #CCC}
+  tr:nth-child(odd) {background: #FFF}
+  /* http://www.w3.org/Style/Examples/007/evenodd.en.html */
+
+  table { border-collapse:collapse; }
+  table, th, td { border: 1px solid black; }
+  /* http://www.w3schools.com/css/css_table.asp */
+</style>
+<table>
+  <tr>
+    <td>Rank</td>
+    <td>Player</td>
+    <td>Score</td>
+  </tr>
+  <% i = 1 %>
+  <% @players.each do |player| %>
+  <tr>
+    <td><%= "#{i}" %><% i = i + 1 %></td>
+    <td><%= "#{player.name}" %></td>
+    <td><%= "#{player.score}" %></td>
+  </tr>
+  <% end %>
+
+  <% unless @players.include? @player %>
+  <tr>
+    <td>...</td>
+    <td>...</td>
+    <td>...</td>
+  </tr>
+  <tr>
+    <td><%= "#{@rank}" %></td>
+    <td><%= "#{@player.name}" %></td>
+    <td><%= "#{@player.score}" %></td>
+  </tr>
+  <% end %>
+
+</table>
+
+<%#= "#{@players[i]}" %>
+<%#= "#{@players[i].score}" %>
+<%#= "@players.nil? #{@players.nil?}"  %>

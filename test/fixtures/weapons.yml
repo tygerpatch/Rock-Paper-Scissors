@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+rock:
+  name: Rock
+
+paper:
+  name: paper
+
+scissors:
+  name: scissors
+ 

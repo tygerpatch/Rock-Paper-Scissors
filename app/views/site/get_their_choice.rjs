@@ -1,0 +1,63 @@
+rock = Weapon.find_by_name "Rock"
+paper = Weapon.find_by_name "Paper"
+scissor = Weapon.find_by_name "Scissors"
+
+player = Player.find session[:id]
+game = player.game
+
+unless game.opponent_weapon.nil?
+  if(game.player_weapon == game.opponent_weapon)
+    message = "TIE"
+  elsif((game.player_weapon == paper) && (game.opponent_weapon == rock))
+    message = "Paper covers rock. You win."
+    player.score += 1
+  elsif((game.player_weapon == rock) && (game.opponent_weapon == scissor))
+    message = "Rock breaks scissors. You win."
+    player.score += 1
+  elsif((game.player_weapon == scissor) && (game.opponent_weapon == paper))
+    message = "Scissors cut paper. You win."
+    player.score += 1
+  elsif((game.opponent_weapon == paper) && (game.player_weapon == rock))
+    message = "Paper covers rock. You Lost."
+    player.score -= 1
+  elsif((game.opponent_weapon == rock) && (game.player_weapon == scissor))
+    message = "Rock breaks scissors. You Lost."
+    player.score -= 1
+  elsif((game.opponent_weapon == scissor) && (game.player_weapon == paper))
+    message = "Scissors cut paper. You Lost."
+    player.score -= 1
+  else
+    message = "ERROR"
+  end
+
+  player.save
+  img_src = "/images/" + game.opponent_weapon.name + ".gif" 
+
+  game.opponent = nil
+  game.opponent_weapon = nil
+  game.save
+
+  page.call 'displayTheirChoice', img_src, message
+end
+
+timer = params[:timer]
+timer = timer.to_i
+
+timer = timer * 2
+flag = false
+
+if timer >= 8000 # 120000
+  timer = 0
+  flag = true
+
+  opponent_game = player.opponent.game
+  opponent_game.opponent = nil
+  opponent_game.save
+
+  player_game = player.game
+  player_game.opponent = nil
+  player_game.save
+
+end
+
+page.call 'update_timer', timer, flag
